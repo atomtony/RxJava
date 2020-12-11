@@ -2,7 +2,7 @@ buildscript {
 
   // Dependency versions
   // ---------------------------------------
-  
+
   ext.reactiveStreamsVersion = "1.0.3"
   ext.junitVersion = "4.12"
   ext.testNgVersion = "7.0.0"
@@ -20,7 +20,7 @@ buildscript {
 
   // --------------------------------------
 
-  repositories { 
+  repositories {
     jcenter()
     mavenCentral()
     maven {
@@ -66,8 +66,8 @@ apply plugin: "com.jfrog.bintray"
 apply plugin: "com.jfrog.artifactory"
 apply plugin: "eclipse"
 
-sourceCompatibility = JavaVersion.VERSION_1_6
-targetCompatibility = JavaVersion.VERSION_1_6
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
   mavenCentral()
@@ -192,7 +192,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            artifact (sourcesJar) { 
+            artifact (sourcesJar) {
                 classifier = "sources"
             }
         }
@@ -229,7 +229,7 @@ plugins.withType(EclipsePlugin) {
 }
 
 test {
-    
+
     testLogging  {
         // showing skipped occasionally should prevent CI timeout due to lack of standard output
         events=["skipped", "failed"] // "started", "passed"
@@ -241,7 +241,7 @@ test {
 
         info.events = ["failed", "skipped"]
         info.exceptionFormat="full"
-        
+
         warn.events = ["failed", "skipped"]
         warn.exceptionFormat="full"
     }
@@ -253,7 +253,7 @@ test {
     }
 }
 
-task testng(type: Test) { 
+task testng(type: Test) {
      useTestNG()
      testLogging  {
         events=["skipped", "failed"]
@@ -264,13 +264,13 @@ task testng(type: Test) {
 
         info.events = ["failed", "skipped"]
         info.exceptionFormat="full"
-        
+
         warn.events = ["failed", "skipped"]
         warn.exceptionFormat="full"
      }
-} 
+}
 
-check.dependsOn testng 
+check.dependsOn testng
 
 jacoco {
     toolVersion = jacocoVersion // See http://www.eclemma.org/jacoco/.
@@ -317,25 +317,25 @@ if (rootProject.hasProperty("releaseMode")) {
 
   if ("branch".equals(rootProject.releaseMode)) {
     // From https://github.com/ReactiveX/RxAndroid/blob/2.x/rxandroid/build.gradle#L94
-  
+
     println("ReleaseMode: " + rootProject.releaseMode);
     artifactory {
         contextUrl = "https://oss.jfrog.org"
-    
+
         publish {
             repository {
                 repoKey = "oss-snapshot-local"
-    
+
                 username = rootProject.bintrayUser
                 password = rootProject.bintrayKey
             }
-    
+
             defaults {
                 publishConfigs("archives")
             }
         }
     }
-    
+
     build.finalizedBy(artifactoryPublish)
   }
 
@@ -363,7 +363,7 @@ if (rootProject.hasProperty("releaseMode")) {
                 sign = true
              }
              mavenCentralSync {
-               sync = true 
+               sync = true
                user = rootProject.sonatypeUsername
                password = rootProject.sonatypePassword
                close = "1"
@@ -371,7 +371,7 @@ if (rootProject.hasProperty("releaseMode")) {
            }
          }
       }
-      
+
       build.finalizedBy(bintrayUpload)
    }
 }
