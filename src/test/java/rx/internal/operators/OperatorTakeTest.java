@@ -16,7 +16,6 @@
 package rx.internal.operators;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.*;
@@ -488,7 +487,7 @@ public class OperatorTakeTest {
                             }
                         }
                 );
-            
+
             assertEquals("" + errors, 1, errors.size());
             assertTrue("" + errors.get(0), errors.get(0).getMessage().equals("bla"));
         } finally {

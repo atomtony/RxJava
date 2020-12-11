@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        mavenLocal()
     }
     dependencies {
         classpath 'com.netflix.nebula:gradle-rxjava-project-plugin:4.0.0'

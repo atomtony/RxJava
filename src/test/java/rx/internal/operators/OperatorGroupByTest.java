@@ -16,7 +16,6 @@
 package rx.internal.operators;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.*;
@@ -2049,7 +2048,7 @@ public class OperatorGroupByTest {
         assertTrue("" + c, c > 0);
         assertTrue("" + c, c < 10000);
     }
-    
+
     @Test
     public void groupByEvictingMapFactoryThrows() {
         final RuntimeException ex = new RuntimeException("boo");
